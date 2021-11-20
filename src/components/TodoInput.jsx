@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../state/actions/index';
-
+import IconButton from '@mui/material/IconButton';
 const Container = styled.div`
   border: 1px solid #e3e7f1;
   border-radius: 10px;
@@ -13,9 +13,15 @@ const Container = styled.div`
   transition: all 0.2s ease-out;
   margin-top: 1rem;
 
-  :hover {
-    border: 2px solid #2b4255;
-  }
+  border: ${(props) => {
+    if (props.notEmpty === true) {
+      console.log('notempty');
+      return '1px solid #2b4255';
+    } else {
+      console.log('éempty');
+      return '1px solid #e3e7f1;';
+    }
+  }};
 `;
 const Form = styled.form`
   display: flex;
@@ -37,11 +43,6 @@ const StyledIcon = styled(ControlPointIcon)`
   color: #2b4255;
   cursor: pointer;
 `;
-const Button = styled.button`
-  border: none;
-  outline: none;
-  background-color: transparent;
-`;
 const TodoInput = () => {
   const dispatch = useDispatch();
   const [input, setInput] = React.useState({
@@ -60,7 +61,7 @@ const TodoInput = () => {
   };
 
   return (
-    <Container>
+    <Container notEmpty={input.todoName.length > 0 ? true : false}>
       <Form onSubmit={handleSubmit}>
         <Input
           type='text'
@@ -70,9 +71,9 @@ const TodoInput = () => {
           value={input.todoName}
           maxLength={60}
         />
-        <Button type='submit'>
+        <IconButton type='submit' disabled={!input.todoName}>
           <StyledIcon />
-        </Button>
+        </IconButton>
       </Form>
     </Container>
   );
