@@ -12,6 +12,7 @@ const Container = styled.div`
   overflow: hidden;
   transition: all 0.2s ease-out;
   margin-top: 1rem;
+
   :hover {
     border: 2px solid #2b4255;
   }

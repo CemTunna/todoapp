@@ -8,13 +8,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteTodo, completeTodo } from '../state/actions';
 const Container = styled.div`
   border: 1px solid #e3e7f1;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 40rem;
   padding: 2rem;
   background: linear-gradient(#ffffff 85%, #e3e7f1 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
 const TitleContainer = styled.div`
   padding: 0 0.4rem;
@@ -42,7 +45,7 @@ const Item = styled.li`
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  cursor: pointer;
+
   :hover {
     border: 2px solid #2b4255;
   }
@@ -60,6 +63,12 @@ const StyledDel = styled(DeleteIcon)`
 const StyledDone = styled(DoneIcon)`
   color: #19f804;
   margin-right: 0.5rem;
+`;
+const TodoSpan = styled.span`
+  cursor: pointer;
+  :hover {
+    opacity: 0.6;
+  }
 `;
 const TodoList = () => {
   const { todos } = useSelector((state) => state.todos);
@@ -85,7 +94,9 @@ const TodoList = () => {
         {todos.length >= 1 &&
           todos.map((todo, index) => (
             <Item key={index}>
-              <span onClick={() => handleComplete(index)}>{todo.todoName}</span>
+              <TodoSpan onClick={() => handleComplete(index)}>
+                {todo.todoName}
+              </TodoSpan>
               <IconContainer>
                 {todo.completed && <StyledDone />}
                 <StyledDel onClick={() => handleDelete(index)} />
