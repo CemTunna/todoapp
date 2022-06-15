@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoList from '../components/TodoList';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Logo';
 import styled from 'styled-components';
 const Container = styled.div`
   height: 100vh;

@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../state/actions/index';
 import IconButton from '@mui/material/IconButton';
+import * as types from '../state/types/index';
+
 const Container = styled.div`
   border: 1px solid #e3e7f1;
   border-radius: 10px;
@@ -15,10 +16,8 @@ const Container = styled.div`
 
   border: ${(props) => {
     if (props.notEmpty === true) {
-      console.log('notempty');
       return '1px solid #2b4255';
     } else {
-      console.log('éempty');
       return '1px solid #e3e7f1;';
     }
   }};
@@ -56,7 +55,8 @@ const TodoInput = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input.todoName.trim() !== '') dispatch(addTodo(input));
+    if (input.todoName.trim() !== '')
+      dispatch({ type: types.ADD_TODO, payload: input });
     setInput((prevState) => ({ ...prevState, todoName: '' }));
   };
 

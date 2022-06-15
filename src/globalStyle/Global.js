@@ -6,8 +6,7 @@ const GlobalStyle = createGlobalStyle`
      padding:0;
      background-color: #2B4255;    
      height:100vh;
-     width: 100vw;
-    
+     width: 100vw;    
 
   }
 

@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Badge } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteTodo, completeTodo } from '../state/actions';
+import * as types from '../state/types/index';
+
 const Container = styled.div`
   border: 1px solid #e3e7f1;
   border-radius: 10px;
@@ -18,8 +19,9 @@ const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
   @media (max-width: 730px) {
-    width: 25rem;
+    width: 20rem;
   }
   @media (max-width: 380px) {
     width: 15rem;
@@ -81,11 +83,11 @@ const TodoList = () => {
   const dispatch = useDispatch();
 
   const handleComplete = (index) => {
-    dispatch(completeTodo(index));
+    dispatch({ type: types.COMPLETE_TODO, payload: index });
     console.log(index);
   };
   const handleDelete = (index) => {
-    dispatch(deleteTodo(index));
+    dispatch({ type: types.DELETE_TODO, payload: index });
   };
 
   return (
